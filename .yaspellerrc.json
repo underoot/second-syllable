@@ -2,5 +2,9 @@
   "lang": "ru",
   "ignoreUrls": true,
   "checkYo": true,
-  "dictionary": []
+  "dictionary": [
+    "вабадузе",
+    "стрим",
+    "фронтенд"
+  ]
 }
