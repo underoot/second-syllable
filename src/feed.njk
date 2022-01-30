@@ -1,0 +1,68 @@
+---
+permalink: index.xml
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss
+	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+	version="2.0"
+>
+<channel>
+
+<title>{{ data.title }}</title>
+<description>{{ data.description }}</description>
+<copyright>{{ data.copyright }}</copyright>
+<language>{{ data.language }}</language>
+<link>{{ data.paths.page }}</link>
+
+<itunes:author>{{ data.author }}</itunes:author>
+<itunes:subtitle>{{ data.subtitle }}</itunes:subtitle>
+<itunes:image href="{{ data.paths.cover }}"/>
+<itunes:category text="{{ data.category }}"/>
+<itunes:type>{{ data.type }}</itunes:type>
+<itunes:explicit>{{ data.explicit }}</itunes:explicit>
+<itunes:owner>
+	<itunes:name>{{ data.owner.name }}</itunes:name>
+	<itunes:email>{{ data.owner.email }}</itunes:email>
+</itunes:owner>
+
+{%- for episode in collections.episode | reverse -%}
+	{% set date = episode.date | ruDate %}
+
+	{% set description %}
+		<p>
+			{{ epiode.data.summary }}
+		</p>
+		{% if episode.data.chapters %}
+			{%- for chapter in episode.data.chapters -%}
+				{{ chapter.time }} {{ chapter.title }}<br/>
+			{%- endfor -%}
+		{% endif %}
+		{{ episode.templateContent | safe }}
+	{% endset %}
+
+	{% set fileUrl %}
+		{{ data.paths.audio }}{{ episode.fileSlug }}.mp3
+	{% endset %}
+	{% set filePath %}
+		{{ data.paths.file }}{{ episode.fileSlug }}.mp3
+	{% endset %}
+
+	<item>
+		<title>{{ episode.fileSlug }}. {{ episode.data.title | escape }}</title>
+		<link>{{ data.paths.page }}{{ episode.fileSlug }}/</link>
+		<pubDate>{{ episode.date.toUTCString() }}</pubDate>
+		<description><![CDATA[{{ description | htmlmin | safe }}]]></description>
+		<guid isPermaLink="true">{{ fileUrl | trim }}</guid>
+		<enclosure type="audio/mpeg" url="{{ fileUrl | trim }}" length="{{ filePath | trim | length }}"/>
+
+		<itunes:episode>{{ episode.fileSlug }}</itunes:episode>
+		<itunes:duration>{{ filePath | trim | duration }}</itunes:duration>
+		<itunes:author>{{ data.author }}</itunes:author>
+		<itunes:explicit>{{ data.explicit }}</itunes:explicit>
+		<itunes:summary>{{ episode.data.summary | trim }}</itunes:summary>
+		<itunes:image href="{{ data.paths.cover }}"/>
+	</item>
+{%- endfor -%}
+
+</channel>
+</rss>

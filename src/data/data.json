@@ -1,0 +1,22 @@
+{
+  "title": "Второй слог",
+  "subtitle": "Программист. Экспат. Исследователь.",
+  "description": "Это мое еженедельное шоу в котором, делюсь самым искренним и сокровенным тут.",
+  "author": "Александр Шоронов",
+  "category": "Technology",
+  "type": "episodic",
+  "explicit": false,
+  "language": "ru",
+  "copyright": "СС BY-NC-ND 4.0",
+  "owner": {
+    "name": "Александр Шоронов",
+    "email": "alex.shoronov@gmail.com"
+  },
+  "paths": {
+    "page": "https://underoot.dev/podcasts/me",
+    "cover": "https://static.underoot.dev/podcasts/me/cover.jpg",
+    "feed": "https://underoot.dev/podcasts/me/feed/",
+    "audio": "https://static.underoot.dev/podcasts/me/audio/",
+    "file": "src/mp3/"
+  }
+}
